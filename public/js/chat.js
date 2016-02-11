@@ -15,7 +15,9 @@ console.log('You should see this log message in your console');
     // in the `chats` variable start (ie. those that should be written
     // to the page).
     // 
-    function updateDOM(startIndex){
+    function updateDOM(startIndex)
+    {
+	    
     }
 
     // TODO #3: Write a function that requests an array of new chats
@@ -35,7 +37,18 @@ console.log('You should see this log message in your console');
     // 'application/x-www-form-urlencoded' or 'application/json;charset=UTF-8'.
     // See `index.js` to see how that request will be handled.
     // 
-    function sendChatMessage(message){
+    function sendChatMessage(message)
+    {
+	     var httpRequest = new XMLHttpRequest();
+	     var jsonmsg = { "message" : message};
+	     httpRequest.open("POST", "http://localhost:3000/chats", true);
+	     httpRequest.onreadystatechange = fetchChatsFromServer;
+	     httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+		//chats.push(message);
+
+	     httpRequest.send(JSON.stringify(jsonmsg));
+
     }
     
     // TODO #1: Add an event listener that listens for when a user
@@ -43,6 +56,7 @@ console.log('You should see this log message in your console');
     // function with the value of the text entered in the textbox.
     // 
     function startAcceptingUserChats(){
+
     }
     
     // This event is fired when all the content on the page
