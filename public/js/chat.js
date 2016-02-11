@@ -1,12 +1,21 @@
 "use strict";
 console.log('You should see this log message in your console');
 
+
+
 // Put all your code in this anonymous function, which is executed
 // immediately; That way, we do not "pollute" the global namespace in
 // our web browser.
 //
+//
+    $( document ).ready(function() {
+
+      console.log( 'ready!' );
+    });
+
+
 (function(){
-    
+   
     var chats = [];
 
     // TODO #4: Write a function that adds `li` elements to the `ul`
@@ -16,6 +25,8 @@ console.log('You should see this log message in your console');
     // to the page).
     // 
     function updateDOM(startIndex){
+
+
     }
 
     // TODO #3: Write a function that requests an array of new chats
@@ -27,6 +38,8 @@ console.log('You should see this log message in your console');
     // should call itself again after a one or two second delay.
     // 
     function fetchChatsFromServer(){
+
+
     }
     
 
@@ -35,7 +48,7 @@ console.log('You should see this log message in your console');
     // 'application/x-www-form-urlencoded' or 'application/json;charset=UTF-8'.
     // See `index.js` to see how that request will be handled.
     // 
-    function sendChatMessage(message){
+    function sendChatMessage(message) {
     }
     
     // TODO #1: Add an event listener that listens for when a user
@@ -43,6 +56,10 @@ console.log('You should see this log message in your console');
     // function with the value of the text entered in the textbox.
     // 
     function startAcceptingUserChats(){
+      $( "#submit" ).click(function( event ) {
+        sendChatMessage( $( "#message" ).val() );
+        //console.log( $("#message" ).val() );
+      });
     }
     
     // This event is fired when all the content on the page
