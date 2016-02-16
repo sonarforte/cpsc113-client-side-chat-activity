@@ -25,6 +25,13 @@ console.log('You should see this log message in your console');
     // to the page).
     // 
     function updateDOM(startIndex){
+      var chatsList = document.getElementById("chats");
+      for (var i = startIndex; i < chats.length; i++) {
+        var liEntry = document.createElement("li");
+        var textNode = document.createTextNode(chats[i]);
+        liEntry.appendChild(textNode);
+        chatsList.appendChild(liEntry);
+      }
     }
 
     // TODO #3: Write a function that requests an array of new chats
@@ -59,7 +66,6 @@ console.log('You should see this log message in your console');
 
             httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
             httpRequest.send();
-
 
     }
     
