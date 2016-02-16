@@ -45,10 +45,11 @@ console.log('You should see this log message in your console');
     function fetchChatsFromServer(){
 	    
 	    var httpRequest = new XMLHttpRequest();
-            httpRequest.open("GET", "http://localhost:3000/chats/" + chats.length, true);
+	    var startIndex = chats.length;
+            httpRequest.open("GET", "http://localhost:3000/chats/" + startIndex, true);
 
-            httpRequest.onreadystatechange( function({
-  		if (httpRequest.readyState == 4 && httpRequest.status == 200) 
+            httpRequest.onreadystatechange = function(){
+  		if ((httpRequest.readyState == 4) && (httpRequest.status == 200)) 
 		{
 			var arr = JSON.parse(httpRequest.responseText);
 			for(var i = 0; i < arr.length; i++)
@@ -56,6 +57,7 @@ console.log('You should see this log message in your console');
 				chats.push(arr[i]);
 				console.log(arr[i]);
 			}
+			updateDOM(startIndex);
 	    	}
 		else
 		{
@@ -67,6 +69,7 @@ console.log('You should see this log message in your console');
             httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
             httpRequest.send();
 
+	    setTimeout(fetchChatsFromServer, 2000);
     }
     
 
@@ -82,7 +85,7 @@ console.log('You should see this log message in your console');
 	     httpRequest.open("POST", "http://localhost:3000/chats", true);
 	     httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
 
-		//chats.push(message);
+	     chats.push(message);
 
 	     httpRequest.send(JSON.stringify(jsonmsg));
     }

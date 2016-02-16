@@ -32,6 +32,7 @@ app.get('/chats/:latest', function(req, res){
     }
     var latestChats = chats.slice(latest);
     console.log('Received requests for chats since #', latest, 'of which there are', latestChats.length);
+    console.log(latestChats);
     res.json(latestChats);
 });
 
