@@ -36,6 +36,29 @@ console.log('You should see this log message in your console');
     // should call itself again after a one or two second delay.
     // 
     function fetchChatsFromServer(){
+	    
+	    var httpRequest = new XMLHttpRequest();
+            httpRequest.open("GET", "http://localhost:3000/chats/" + chats.length, true);
+
+            httpRequest.onreadystatechange( function({
+  		if (httpRequest.readyState == 4 && httpRequest.status == 200) 
+		{
+			var arr = JSON.parse(httpRequest.responseText);
+			for(var i = 0; i < arr.length; i++)
+			{
+				chats.push(arr[i]);
+				console.log(arr[i]);
+			}
+	    	}
+		else
+		{
+			console.log("httpRequest ain't ready!\n");
+		}
+	    };
+
+
+            httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+            httpRequest.send();
 
 
     }
@@ -51,7 +74,6 @@ console.log('You should see this log message in your console');
 	     var httpRequest = new XMLHttpRequest();
 	     var jsonmsg = { "message" : message};
 	     httpRequest.open("POST", "http://localhost:3000/chats", true);
-	     httpRequest.onreadystatechange = fetchChatsFromServer;
 	     httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
 
 		//chats.push(message);
